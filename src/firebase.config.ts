@@ -2,12 +2,12 @@ import {getFirestore} from 'firebase/firestore';
 import {initializeApp} from 'firebase/app';
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyCj5SzakMy_gZwgytr6Rnh_EPlIO-V17Y4',
-	authDomain: 'house-marketplace-4341d.firebaseapp.com',
-	projectId: 'house-marketplace-4341d',
-	storageBucket: 'house-marketplace-4341d.appspot.com',
-	messagingSenderId: '601248107996',
-	appId: '1:601248107996:web:5d9a540bb226b497995319',
+	apiKey: 'AIzaSyD6CLU3iRH0eZQVyv9eY3HuB9JaGU3poss',
+	authDomain: 'marketplace-d9064.firebaseapp.com',
+	projectId: 'marketplace-d9064',
+	storageBucket: 'marketplace-d9064.appspot.com',
+	messagingSenderId: '972150034133',
+	appId: '1:972150034133:web:ee3ff4426cdd8098dc9c5c',
 };
 
 // Initialize Firebase
