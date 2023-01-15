@@ -14,6 +14,12 @@ body {
 	box-sizing: border-box;
 }
 
+.animation-container {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
 a {
 	text-decoration: none;
 	display: block;
@@ -92,6 +98,7 @@ button {
 .category,
 .explore {
 	margin: 1rem;
+	min-width: 420px;
 }
 @media (min-width: 1024px) {
 	.pageContainer,
@@ -101,6 +108,7 @@ button {
 	.category,
 	.explore {
 		margin: 3rem;
+		min-width: 780px;
 	}
 }
 
@@ -179,7 +187,7 @@ button {
 	font-size: 14px;
 	font-weight: 600;
 	color: #8f8f8f;
-	transition: 0.45s all;
+	transition: 0.3s all;
 }
 .navbarListItemNameActive {
 	color: #2c2c2c;
@@ -205,7 +213,7 @@ button {
 }
 
 svg {
-	transition: 0.45s all;
+	transition: 0.3s all;
 }
 
 .showPassword {
@@ -221,15 +229,21 @@ svg {
 	color: #00cc66;
 	font-weight: 600;
 	text-align: right;
+	font-size: 16px;
 }
 
 .signInBar,
 .signUpBar {
-	margin-top: 3rem;
+	margin-top: 2rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	position: inherit;
+}
+
+.registerLink {
+	text-align: right;
+	font-size: 16px;
 }
 
 .signInButton,
@@ -294,7 +308,7 @@ svg {
 }
 
 .registerLink {
-	margin-top: 4rem;
+	margin-top: 2rem;
 	color: #00cc66;
 	font-weight: 600;
 	text-align: center;
@@ -638,7 +652,7 @@ svg {
 .profileDetailsHeader {
 	display: flex;
 	justify-content: space-between;
-	max-width: 500px;
+	max-width: 100%;
 }
 
 .personalDetailsText {
@@ -656,7 +670,7 @@ svg {
 	border-radius: 1rem;
 	padding: 1rem;
 	box-shadow: rgba(0, 0, 0, 0.2);
-	max-width: 500px;
+	max-width: 100%;
 }
 
 .profileDetails {

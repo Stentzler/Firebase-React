@@ -1,5 +1,7 @@
+import MotionContainer from '../components/Motion';
+
 function Explore() {
-	return <div>Explore</div>;
+	return <MotionContainer>Explore</MotionContainer>;
 }
 
 export default Explore;

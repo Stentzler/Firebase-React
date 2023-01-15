@@ -1,5 +1,7 @@
+import MotionContainer from '../components/Motion';
+
 function Offers() {
-	return <div>Offers</div>;
+	return <MotionContainer>Offers</MotionContainer>;
 }
 
 export default Offers;
