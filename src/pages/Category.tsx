@@ -21,7 +21,7 @@ interface data {
 	data: DocumentData;
 }
 
-function Offers() {
+function Category() {
 	const [listings, setListings] = useState<[] | data[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -36,7 +36,7 @@ function Offers() {
 				// Creating a query
 				const q = query(
 					listingsRef,
-					where('offer', '==', true),
+					where('type', '==', params.categoryName),
 					orderBy('timestamp', 'desc'),
 					limit(10)
 				);
@@ -60,13 +60,15 @@ function Offers() {
 		};
 
 		fetchListings();
-	}, []);
+	}, [params.categoryName]);
 
 	return (
 		<MotionContainer>
 			<div className='category'>
 				<header className='pageHeader'>
-					<p className='pageHeader'>Ofertas</p>
+					<p className='pageHeader'>
+						{params.categoryName === 'rent' ? 'Aluguel' : 'Compra'}
+					</p>
 				</header>
 
 				{loading ? (
@@ -86,11 +88,11 @@ function Offers() {
 						</main>
 					</>
 				) : (
-					<p>Não há ofertas no momento</p>
+					<p>Nada foi encontrado em: {params.categoryName}</p>
 				)}
 			</div>
 		</MotionContainer>
 	);
 }
 
-export default Offers;
+export default Category;

@@ -1,11 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import MotionContainer from '../components/Motion';
 import {getAuth, updateProfile} from 'firebase/auth';
 import {updateDoc, doc} from 'firebase/firestore';
 import app, {db} from '../firebase.config';
 import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
+import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg';
+import homeIcon from '../assets/svg/homeIcon.svg';
 
 function Profile() {
 	const auth = getAuth(app);
@@ -98,6 +99,12 @@ function Profile() {
 							/>
 						</form>
 					</div>
+
+					<Link to='/create-listing' className='createListing'>
+						<img src={homeIcon} alt='home' />
+						<p>Venda ou alugue seu imóvel</p>
+						<img src={arrowRight} alt='arrow' />
+					</Link>
 				</main>
 			</div>
 		</MotionContainer>

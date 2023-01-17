@@ -145,6 +145,7 @@ button {
 .pageHeader {
 	font-size: 2rem;
 	font-weight: 800;
+	margin-bottom: 2rem;
 }
 
 .navbar {
@@ -423,6 +424,7 @@ svg {
 	align-items: center;
 	margin-bottom: 1rem;
 	position: relative;
+	height: 200px;
 }
 
 .categoryListingLink {
@@ -438,7 +440,7 @@ svg {
 @media (min-width: 1024px) {
 	.categoryListingImg {
 		width: 19%;
-		height: 217px;
+		height: 200px;
 	}
 }
 
@@ -448,6 +450,10 @@ svg {
 @media (min-width: 1024px) {
 	.categoryListingDetails {
 		width: 79%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
 	}
 }
 
@@ -835,4 +841,10 @@ svg {
 	margin-left: 1rem;
 	font-size: 0.8rem;
 	opacity: 0.75;
+}
+
+.registerForm {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
 }
