@@ -1,5 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import {addDoc, collection, serverTimestamp} from 'firebase/firestore';
 import {
 	getStorage,
 	ref,
@@ -85,6 +86,7 @@ function CreateListings() {
 			return;
 		}
 
+		// Adding geoloaction
 		let geolocation: any = {};
 		let location = undefined;
 
@@ -105,7 +107,6 @@ function CreateListings() {
 				toast.error('O endereço enviado não foi encontrado');
 				return;
 			}
-			toast.success('Imóvel publicado com sucesso');
 		} else {
 			geolocation.lat = latitude;
 			geolocation.lng = longitude;
@@ -155,9 +156,26 @@ function CreateListings() {
 			return;
 		});
 
-		console.log(imgUrls);
+		const formDataCopy = {
+			...formData,
+			imgUrls,
+			geolocation,
+			timestamp: serverTimestamp(),
+		};
+
+		// Cleaning data for storage
+		delete formDataCopy.images;
+		delete formDataCopy.latitude;
+		delete formDataCopy.longitude;
+		delete formDataCopy.address;
+		location && (formDataCopy.location = location);
+		!formDataCopy.offer && delete formDataCopy.discountedPrice;
+
+		const docRef = await addDoc(collection(db, 'listings'), formDataCopy);
 
 		setLoading(false);
+		toast.success('Imóvel adicionado com sucesso!');
+		navigate(`/category/${formDataCopy.type}/${docRef.id}`);
 	};
 
 	const onMutate = (e: any) => {
@@ -314,6 +332,28 @@ function CreateListings() {
 							onChange={onMutate}
 							required
 						></textarea>
+
+						<label className='formLabel'>Oferta</label>
+						<div className='formButtons'>
+							<button
+								className={offer ? 'formButtonActive' : 'formButton'}
+								type='button'
+								id='offer'
+								value='true'
+								onClick={onMutate}
+							>
+								Sim
+							</button>
+							<button
+								className={!offer ? 'formButtonActive' : 'formButton'}
+								type='button'
+								id='offer'
+								value='false'
+								onClick={onMutate}
+							>
+								Não
+							</button>
+						</div>
 
 						{!geolocationEnabled && (
 							<div className='formLatLng flex'>

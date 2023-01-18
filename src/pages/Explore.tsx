@@ -8,11 +8,11 @@ function Explore() {
 		<MotionContainer>
 			<div className='explore'>
 				<header>
-					<p className='pageHeader'>Explore</p>
+					<p className='pageHeader'>Nossos Imóveis</p>
 				</header>
 				<main>
 					{/* Slider */}
-					<p className='exploreCategoryHeading'>Categories</p>
+					<p className='exploreCategoryHeading'>Categorias</p>
 					<div className='exploreCategories'>
 						<Link to='/category/rent'>
 							<img
@@ -20,7 +20,7 @@ function Explore() {
 								alt='rent'
 								className='exploreCategoryImg'
 							/>
-							<p className='exploreCategoryName'>Properties for rent</p>
+							<p className='exploreCategoryName'>Alugar Imóvel</p>
 						</Link>
 
 						<Link to='/category/sale'>
@@ -29,7 +29,7 @@ function Explore() {
 								alt='sell'
 								className='exploreCategoryImg'
 							/>
-							<p className='exploreCategoryName'>Properties for sale</p>
+							<p className='exploreCategoryName'>Comprar Imóvel</p>
 						</Link>
 					</div>
 				</main>

@@ -5,7 +5,6 @@ import {
 	limit,
 	orderBy,
 	query,
-	startAfter,
 	where,
 } from 'firebase/firestore';
 import {useEffect, useState} from 'react';
@@ -25,7 +24,7 @@ function Offers() {
 	const [listings, setListings] = useState<[] | data[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 
-	const params = useParams();
+	// const params = useParams();
 
 	useEffect(() => {
 		const fetchListings = async () => {
