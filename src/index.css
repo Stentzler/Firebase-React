@@ -356,10 +356,14 @@ svg {
 	background-color: #ffffff !important;
 }
 
-.swiperSlideDiv {
+.swiperSlideDiv,
+.swiperSlideHome {
 	position: relative;
 	width: 100%;
 	height: 100%;
+}
+.swiperSlideHome:hover {
+	cursor: pointer;
 }
 
 .swiperSlideImg {
@@ -370,46 +374,47 @@ svg {
 .swiperSlideText {
 	color: #ffffff;
 	position: absolute;
-	top: 70px;
+	top: 0;
 	left: 0;
-	font-weight: 600;
-	max-width: 90%;
-	font-size: 1.25rem;
+	margin: 0;
+	font-size: 16px !important;
 	background-color: rgba(0, 0, 0, 0.8);
-	padding: 0.5rem;
+	padding: 0.4rem;
 }
 @media (min-width: 1024px) {
 	.swiperSlideText {
-		font-size: 1.75rem;
-	}
-	.swiper-container {
-		margin-top: 1rem;
+		font-size: 16px !important;
 	}
 }
 
 .swiperSlidePrice {
-	color: #000000;
+	color: #fff;
 	position: absolute;
-	top: 143px;
-	left: 11px;
-	font-weight: 600;
-	max-width: 90%;
-	background-color: #ffffff;
-	padding: 0.25rem 0.5rem;
-	border-radius: 1rem;
+	top: 0;
+	right: 0;
+	margin: 0;
+	font-size: 16px !important;
+	background-color: rgba(0, 0, 0, 0.8);
+	padding: 0.4rem;
 }
 @media (min-width: 1024px) {
 	.swiperSlidePrice {
-		font-size: 1.25rem;
+		font-size: 16px !important;
 	}
 }
 
 .exploreCategories {
 	display: flex;
 	justify-content: space-between;
+	flex-direction: column;
 }
 .exploreCategories a {
 	width: 48%;
+}
+@media (min-width: 1024px) {
+	.exploreCategories {
+		flex-direction: row;
+	}
 }
 
 .exploreCategoryImg {
@@ -610,7 +615,7 @@ svg {
 	padding: 0.5rem 1rem;
 	font-weight: 600;
 	animation-name: linkCopied;
-	animation-duration: 3s;
+	animation-duration: 2s;
 }
 
 .contactListingName {

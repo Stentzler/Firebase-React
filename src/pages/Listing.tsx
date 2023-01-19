@@ -70,7 +70,7 @@ function Listing() {
 						setShareLink(true);
 						setTimeout(() => {
 							setShareLink(false);
-						}, 3000);
+						}, 2000);
 					}}
 				>
 					<img src={shareIcon} alt='share' />

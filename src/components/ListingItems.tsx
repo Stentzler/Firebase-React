@@ -3,9 +3,7 @@ import {ReactComponent as DeleteIcon} from '../assets/svg/deleteIcon.svg';
 import bedIcon from '../assets/svg/bedIcon.svg';
 import bathtubIcon from '../assets/svg/bathtubIcon.svg';
 
-function ListingItems({listing, id}: any) {
-	const onDelete = (is: any, name: any) => `${is} - ${name}`;
-
+function ListingItems({listing, id, onDelete}: any) {
 	return (
 		<li className='categoryListing'>
 			<Link
@@ -52,7 +50,7 @@ function ListingItems({listing, id}: any) {
 				<DeleteIcon
 					className='removeIcon'
 					fill='rgb(231,76,60)'
-					onClick={() => onDelete(listing.id, listing.name)}
+					onClick={() => onDelete(id)}
 				></DeleteIcon>
 			)}
 		</li>
