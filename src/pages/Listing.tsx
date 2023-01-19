@@ -43,11 +43,6 @@ function Listing() {
 	return (
 		<MotionContainer>
 			<main>
-				{/* <div className='swiper-container'>
-					<div className='swiperSlideDiv'>
-						<h3 className='swiperSlideImg'>1</h3>
-					</div>
-				</div> */}
 				<React.StrictMode>
 					<Carousel className='swiper-container'>
 						{listing.imgUrls.map((url: any, index: any) => (
@@ -105,11 +100,13 @@ function Listing() {
 
 					<ul className='listDetailsList'>
 						<li>
-							{listing.bedroms > 1 ? `${listing.bedroms} Quartos` : '1 Quarto'}
+							{listing.bedrooms > 1
+								? `${listing.bedrooms} Quartos`
+								: '1 Quarto'}
 						</li>
 						<li>
-							{listing.bathroms > 1
-								? `${listing.bathroms} Banheiros`
+							{listing.bathrooms > 1
+								? `${listing.bathrooms} Banheiros`
 								: '1 Banheiro'}
 						</li>
 						{listing.parking && <li>Garagem</li>}

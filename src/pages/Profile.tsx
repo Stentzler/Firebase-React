@@ -111,6 +111,10 @@ function Profile() {
 		}
 	};
 
+	if (loading) {
+		return <Spinner />;
+	}
+
 	return (
 		<MotionContainer>
 			<div className='profile'>

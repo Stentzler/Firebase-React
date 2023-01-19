@@ -5,6 +5,7 @@ import {
 	limit,
 	orderBy,
 	query,
+	startAfter,
 	where,
 } from 'firebase/firestore';
 import {useEffect, useState} from 'react';
@@ -23,6 +24,8 @@ interface data {
 function Offers() {
 	const [listings, setListings] = useState<[] | data[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
+	const [disableBtn, setDisableBtn] = useState<boolean>(false);
+	const [lastFetchedListing, setLastFetchedListing] = useState<any>(null);
 
 	// const params = useParams();
 
@@ -37,12 +40,19 @@ function Offers() {
 					listingsRef,
 					where('offer', '==', true),
 					orderBy('timestamp', 'desc'),
-					limit(10)
+					limit(4)
 				);
 				// Run query
 				const querySnap = await getDocs(q);
 
 				let listings: data[] = [];
+				const currentLastDoc = querySnap.docs[querySnap.docs.length - 1];
+
+				if (lastFetchedListing === currentLastDoc) {
+					setDisableBtn(true);
+				}
+
+				setLastFetchedListing(currentLastDoc);
 
 				querySnap.forEach(doc => {
 					return listings.push({
@@ -54,12 +64,47 @@ function Offers() {
 				setListings(listings);
 				setLoading(false);
 			} catch (error) {
-				toast.error('Not able to fetch items');
+				toast.error('Não foi possível carregar os imóveis');
 			}
 		};
 
 		fetchListings();
 	}, []);
+
+	// Load More items button
+	const onFetchMoreListings = async () => {
+		try {
+			// Get Reference from firestore
+			const listingsRef = collection(db, 'listings');
+
+			// Creating a query
+			const q = query(
+				listingsRef,
+				where('offer', '==', true),
+				orderBy('timestamp', 'desc'),
+				startAfter(lastFetchedListing),
+				limit(4)
+			);
+			// Run query
+			const querySnap = await getDocs(q);
+
+			let listings: data[] = [];
+			const currentLastDoc = querySnap.docs[querySnap.docs.length - 1];
+			setLastFetchedListing(currentLastDoc);
+
+			querySnap.forEach(doc => {
+				return listings.push({
+					id: doc.id,
+					data: doc.data(),
+				});
+			});
+
+			setListings(prev => [...prev, ...listings]);
+			setLoading(false);
+		} catch (error) {
+			toast.error('Não foi possível carregar os imóveis');
+		}
+	};
 
 	return (
 		<MotionContainer>
@@ -83,6 +128,14 @@ function Offers() {
 								))}
 							</ul>
 						</main>
+
+						{lastFetchedListing && !disableBtn ? (
+							<p className='loadMore' onClick={onFetchMoreListings}>
+								Ver mais
+							</p>
+						) : (
+							<p className='loadMore disabled'>Nao há mais imóveis</p>
+						)}
 					</>
 				) : (
 					<p>Não há ofertas no momento</p>

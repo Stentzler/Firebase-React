@@ -22,8 +22,10 @@ interface data {
 }
 
 function Category() {
+	const [disableBtn, setDisableBtn] = useState<boolean>(false);
 	const [listings, setListings] = useState<[] | data[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
+	const [lastFetchedListing, setLastFetchedListing] = useState<any>(null);
 
 	const params = useParams();
 
@@ -38,12 +40,20 @@ function Category() {
 					listingsRef,
 					where('type', '==', params.categoryName),
 					orderBy('timestamp', 'desc'),
-					limit(10)
+					limit(4)
 				);
 				// Run query
 				const querySnap = await getDocs(q);
 
-				let listings: data[] = [];
+				const currentLastDoc = querySnap.docs[querySnap.docs.length - 1];
+
+				if (lastFetchedListing === currentLastDoc) {
+					setDisableBtn(true);
+				}
+
+				setLastFetchedListing(currentLastDoc);
+
+				const listings: data[] = [];
 
 				querySnap.forEach(doc => {
 					return listings.push({
@@ -61,6 +71,42 @@ function Category() {
 
 		fetchListings();
 	}, [params.categoryName]);
+
+	//Load More Listings Button
+	const onFetchMoreListings = async () => {
+		try {
+			// Get Reference from firestore
+			const listingsRef = collection(db, 'listings');
+
+			// Creating a query
+			const q = query(
+				listingsRef,
+				where('type', '==', params.categoryName),
+				orderBy('timestamp', 'desc'),
+				startAfter(lastFetchedListing),
+				limit(4)
+			);
+			// Run query
+			const querySnap = await getDocs(q);
+
+			const currentLastDoc = querySnap.docs[querySnap.docs.length - 1];
+			setLastFetchedListing(currentLastDoc);
+
+			const listings: data[] = [];
+
+			querySnap.forEach(doc => {
+				return listings.push({
+					id: doc.id,
+					data: doc.data(),
+				});
+			});
+
+			setListings(prev => [...prev, ...listings]);
+			setLoading(false);
+		} catch (error) {
+			toast.error('Not able to fetch items');
+		}
+	};
 
 	return (
 		<MotionContainer>
@@ -86,9 +132,21 @@ function Category() {
 								))}
 							</ul>
 						</main>
+						{lastFetchedListing && !disableBtn ? (
+							<p className='loadMore' onClick={onFetchMoreListings}>
+								Ver mais
+							</p>
+						) : (
+							<p className='loadMore disabled'>Nao há mais imóveis</p>
+						)}
 					</>
 				) : (
-					<p>Nada foi encontrado em: {params.categoryName}</p>
+					<p>
+						Nada foi encontrado em:{' '}
+						{params.categoryName === 'rent'
+							? 'Alugar Imóveis'
+							: 'Vender Imóveis'}
+					</p>
 				)}
 			</div>
 		</MotionContainer>
