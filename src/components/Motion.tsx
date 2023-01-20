@@ -2,16 +2,16 @@ import {motion} from 'framer-motion';
 
 interface Props {
 	children: React.ReactNode;
+	className?: string;
 }
 
-function MotionContainer({children}: Props) {
+function MotionContainer({children, className = ''}: Props) {
 	return (
 		<motion.div
-			style={{display: 'flex', justifyContent: 'center'}}
 			initial={{opacity: 0}}
 			animate={{opacity: 1}}
 			transition={{duration: 0.3}}
-			className='animation-container'
+			className={className}
 		>
 			{children}
 		</motion.div>

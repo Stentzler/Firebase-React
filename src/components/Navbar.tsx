@@ -32,12 +32,11 @@ function Navbar() {
 						</p>
 					</li>
 
-					<li className='navbarListItem'>
+					<li className='navbarListItem' onClick={() => navigate('/offers')}>
 						<OfferIcon
 							fill={patchMatchRoute('/offers') ? '#2c2c2c' : '#8f8f8f'}
 							width='36px'
 							height='36px'
-							onClick={() => navigate('/offers')}
 						/>
 						<p
 							className={
@@ -52,13 +51,33 @@ function Navbar() {
 
 					<li className='navbarListItem' onClick={() => navigate('/profile')}>
 						<PersonOutlineIcon
-							fill={patchMatchRoute('/profile') ? '#2c2c2c' : '#8f8f8f'}
+							fill={
+								patchMatchRoute('/profile')
+									? '#2c2c2c'
+									: patchMatchRoute('/sign-in')
+									? '#2c2c2c'
+									: patchMatchRoute('/sign-up')
+									? '#2c2c2c'
+									: patchMatchRoute('/forgot-password')
+									? '#2c2c2c'
+									: patchMatchRoute('/create-listing')
+									? '#2c2c2c'
+									: '#8f8f8f'
+							}
 							width='36px'
 							height='36px'
 						/>
 						<p
 							className={
 								patchMatchRoute('/profile')
+									? 'navbarListItemNameActive'
+									: patchMatchRoute('/sign-in')
+									? 'navbarListItemNameActive'
+									: patchMatchRoute('/sign-up')
+									? 'navbarListItemNameActive'
+									: patchMatchRoute('/forgot-password')
+									? 'navbarListItemNameActive'
+									: patchMatchRoute('/create-listing')
 									? 'navbarListItemNameActive'
 									: 'navbarListItemName'
 							}

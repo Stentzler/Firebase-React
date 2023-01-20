@@ -1,13 +1,12 @@
 import {getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
 import {doc, getDoc, serverTimestamp, setDoc} from 'firebase/firestore';
-import {useLocation, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import app, {db} from '../firebase.config';
 import googleIcon from '../assets/svg/googleIcon.svg';
 
 function OAuth() {
 	const navigate = useNavigate();
-	const location = useLocation();
 
 	const onGoogleClick = async () => {
 		try {
@@ -38,7 +37,7 @@ function OAuth() {
 
 	return (
 		<div className='socialLogin'>
-			<p>Sign {location.pathname === '/sign-up' ? 'Up' : 'In'} with</p>
+			<p className='signuptext'>Google Login</p>
 			<button className='socialIconDiv' onClick={onGoogleClick}>
 				<img className='socialIconImg' src={googleIcon} alt='google' />
 			</button>

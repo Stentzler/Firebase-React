@@ -70,6 +70,7 @@ function Category() {
 		};
 
 		fetchListings();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params.categoryName]);
 
 	//Load More Listings Button
@@ -109,8 +110,8 @@ function Category() {
 	};
 
 	return (
-		<MotionContainer>
-			<div className='category'>
+		<>
+			<MotionContainer className='category'>
 				<header className='pageHeader'>
 					<p className='pageHeader'>
 						{params.categoryName === 'rent' ? 'Aluguel' : 'Compra'}
@@ -148,8 +149,8 @@ function Category() {
 							: 'Vender Imóveis'}
 					</p>
 				)}
-			</div>
-		</MotionContainer>
+			</MotionContainer>
+		</>
 	);
 }
 

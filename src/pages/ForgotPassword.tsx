@@ -29,7 +29,7 @@ function ForgotPassword() {
 		<MotionContainer>
 			<div className='pageContainer'>
 				<header>
-					<p className='pageHeader'>Forgot Password</p>
+					<p className='pageHeader'>Resetar Senha</p>
 				</header>
 
 				<main>
@@ -43,11 +43,11 @@ function ForgotPassword() {
 							onChange={onChange}
 						/>
 						<Link className='forgotPasswordLink' to='/sign-in'>
-							Sign In
+							Voltar
 						</Link>
 
 						<div className='signInBar'>
-							<div className='signInText'>Send Reset Link</div>
+							<div className='signInText'>Confirmar</div>
 							<button className='signInButton'>
 								<ArrowRightIcon fill='#fff' width='34px' height='34px' />
 							</button>

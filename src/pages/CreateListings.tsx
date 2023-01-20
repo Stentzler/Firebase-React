@@ -200,8 +200,8 @@ function CreateListings() {
 	}
 
 	return (
-		<MotionContainer>
-			<div className='profile'>
+		<>
+			<MotionContainer className='profile'>
 				<header>
 					<p className='pageHeader'>Dados do imóvel</p>
 				</header>
@@ -394,8 +394,8 @@ function CreateListings() {
 						</button>
 					</form>
 				</main>
-			</div>
-		</MotionContainer>
+			</MotionContainer>
+		</>
 	);
 }
 

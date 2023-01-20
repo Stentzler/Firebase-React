@@ -54,19 +54,19 @@ function SignUp() {
 
 			await setDoc(doc(db, 'users', user.uid), formDataCopy);
 
-			toast.success('Registration succesfull');
+			toast.success('Registrado com sucesso');
 
 			navigate('/');
 		} catch (error: any) {
-			toast.error('Not able to register with the provided data');
+			toast.error('Náo foi possível registrar com os dados fornecidos');
 		}
 	};
 
 	return (
-		<MotionContainer>
-			<div className='pageContainer'>
+		<>
+			<MotionContainer className='pageContainer'>
 				<header>
-					<p className='pageHeader'>Welcome</p>
+					<p className='pageHeader'>Registrar</p>
 				</header>
 
 				<main>
@@ -74,7 +74,7 @@ function SignUp() {
 						<input
 							type='text'
 							className='nameInput'
-							placeholder='Name'
+							placeholder='Nome'
 							id='name'
 							value={name}
 							onChange={onChange}
@@ -93,7 +93,7 @@ function SignUp() {
 							<input
 								type={showPassword ? 'text' : 'password'}
 								className='passwordInput'
-								placeholder='password'
+								placeholder='Senha'
 								id='password'
 								value={password}
 								onChange={onChange}
@@ -108,11 +108,11 @@ function SignUp() {
 						</div>
 
 						<Link to='/forgot-password' className='forgotPasswordLink'>
-							Forgot Password?
+							Recuperar Senha
 						</Link>
 
 						<div className='signUpBar'>
-							<p className='signUpText'>Sign Up</p>
+							<p className='signUpText'>Registrar</p>
 							<button className='signInButton'>
 								<ArrowRightIcon fill='#fff' width='34px' height='34px' />
 							</button>
@@ -121,11 +121,11 @@ function SignUp() {
 
 					<OAuth />
 					<Link to='/sing-in' className='registerLink'>
-						Sign In Instead
+						Login
 					</Link>
 				</main>
-			</div>
-		</MotionContainer>
+			</MotionContainer>
+		</>
 	);
 }
 

@@ -3,11 +3,11 @@ import {initializeApp} from 'firebase/app';
 
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-	authDomain: 'marketplace-d9064.firebaseapp.com',
-	projectId: 'marketplace-d9064',
-	storageBucket: 'marketplace-d9064.appspot.com',
-	messagingSenderId: '972150034133',
-	appId: '1:972150034133:web:ee3ff4426cdd8098dc9c5c',
+	authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+	projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+	storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+	appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase

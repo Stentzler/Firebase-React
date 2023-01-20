@@ -107,8 +107,8 @@ function Offers() {
 	};
 
 	return (
-		<MotionContainer>
-			<div className='category'>
+		<>
+			<MotionContainer className='category'>
 				<header className='pageHeader'>
 					<p className='pageHeader'>Ofertas</p>
 				</header>
@@ -134,14 +134,14 @@ function Offers() {
 								Ver mais
 							</p>
 						) : (
-							<p className='loadMore disabled'>Nao há mais imóveis</p>
+							<p className='loadMore disabled'>Nao há mais ofertas</p>
 						)}
 					</>
 				) : (
 					<p>Não há ofertas no momento</p>
 				)}
-			</div>
-		</MotionContainer>
+			</MotionContainer>
+		</>
 	);
 }
 

@@ -118,8 +118,8 @@ function Profile() {
 	}
 
 	return (
-		<MotionContainer>
-			<div className='profile'>
+		<>
+			<MotionContainer className='profile'>
 				<header className='profileHeader'>
 					<p className='pageHeader'>Meu Perfil</p>
 					<button type='button' className='logOut' onClick={onLogout}>
@@ -184,8 +184,8 @@ function Profile() {
 						</>
 					)}
 				</main>
-			</div>
-		</MotionContainer>
+			</MotionContainer>
+		</>
 	);
 }
 

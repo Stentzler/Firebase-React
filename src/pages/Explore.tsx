@@ -6,8 +6,8 @@ import Slider from '../components/Slider';
 
 function Explore() {
 	return (
-		<MotionContainer>
-			<div className='explore'>
+		<>
+			<MotionContainer className='explore'>
 				<header>
 					<p className='pageHeader'>Nossos Imóveis</p>
 				</header>
@@ -34,8 +34,8 @@ function Explore() {
 						</Link>
 					</div>
 				</main>
-			</div>
-		</MotionContainer>
+			</MotionContainer>
+		</>
 	);
 }
 

@@ -3,8 +3,22 @@ import {ReactComponent as DeleteIcon} from '../assets/svg/deleteIcon.svg';
 import {ReactComponent as EditIcon} from '../assets/svg/editIcon.svg';
 import bedIcon from '../assets/svg/bedIcon.svg';
 import bathtubIcon from '../assets/svg/bathtubIcon.svg';
+import {useEffect, useState} from 'react';
 
 function ListingItems({listing, id, onDelete, onEdit}: any) {
+	const [width, setWidth] = useState(0);
+
+	useEffect(() => {
+		const updateWindowDimensions = (): any => {
+			setWidth(window.innerWidth);
+		};
+
+		window.addEventListener('resize', updateWindowDimensions);
+		updateWindowDimensions();
+
+		return () => window.removeEventListener('resize', updateWindowDimensions);
+	}, [width]);
+
 	return (
 		<li className='categoryListing'>
 			<Link
@@ -17,7 +31,13 @@ function ListingItems({listing, id, onDelete, onEdit}: any) {
 					className='categoryListingImg'
 				/>
 				<div className='categoryListingDetails'>
-					<p className='categoryListingLocation'>{listing.location}</p>
+					<p className='categoryListingLocation'>
+						{width >= 1024
+							? listing.location
+							: listing.location.length > 25
+							? listing.location.slice(0, 25) + '...'
+							: listing.location.length}
+					</p>
 					<p className='categoryListingName'>{listing.name}</p>
 					<p className='categoryListingPrice'>
 						$

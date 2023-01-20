@@ -36,11 +36,11 @@ function SignIn() {
 				password
 			);
 			if (userCredential.user) {
-				toast.success('Welcome!');
+				toast.success('Bem-vinda(o)!');
 				navigate('/');
 			}
 		} catch (error) {
-			toast.error('Please check your credentials...');
+			toast.error('Credenciais inválidas');
 		}
 	};
 
@@ -48,7 +48,7 @@ function SignIn() {
 		<MotionContainer>
 			<div className='pageContainer'>
 				<header>
-					<p className='pageHeader'>Welcome Back</p>
+					<p className='pageHeader'>Bem-vindo(a)</p>
 				</header>
 
 				<main>
@@ -65,7 +65,7 @@ function SignIn() {
 							<input
 								type={showPassword ? 'text' : 'password'}
 								className='passwordInput'
-								placeholder='password'
+								placeholder='Senha'
 								id='password'
 								value={password}
 								onChange={onChange}
@@ -80,11 +80,11 @@ function SignIn() {
 						</div>
 
 						<Link to='/forgot-password' className='forgotPasswordLink'>
-							Forgot Password?
+							Recuperar Senha
 						</Link>
 
 						<div className='signInBar'>
-							<p className='signInText'>Sign In</p>
+							<p className='signInText'>Login</p>
 							<button className='signInButton'>
 								<ArrowRightIcon fill='#fff' width='34px' height='34px' />
 							</button>
@@ -93,7 +93,7 @@ function SignIn() {
 
 					<OAuth />
 					<Link to='/sign-up' className='registerLink'>
-						Sign Up Instead
+						Registrar-me
 					</Link>
 				</main>
 			</div>
