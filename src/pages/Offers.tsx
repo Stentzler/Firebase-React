@@ -9,7 +9,6 @@ import {
 	where,
 } from 'firebase/firestore';
 import {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import ListingItems from '../components/ListingItems';
 import MotionContainer from '../components/Motion';
@@ -69,6 +68,7 @@ function Offers() {
 		};
 
 		fetchListings();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// Load More items button

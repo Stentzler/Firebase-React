@@ -111,6 +111,8 @@ function Profile() {
 		}
 	};
 
+	const onEdit = (listingId: any) => navigate(`/edit-listing/${listingId}`);
+
 	if (loading) {
 		return <Spinner />;
 	}
@@ -175,6 +177,7 @@ function Profile() {
 										listing={listing.data}
 										id={listing.id}
 										onDelete={onDelete}
+										onEdit={() => onEdit(listing.id)}
 									></ListingItems>
 								))}
 							</ul>

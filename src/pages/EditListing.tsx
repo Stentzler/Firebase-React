@@ -1,21 +1,22 @@
 import {useState, useEffect, useRef} from 'react';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
-import {addDoc, collection, serverTimestamp} from 'firebase/firestore';
+import {doc, getDoc, serverTimestamp, updateDoc} from 'firebase/firestore';
 import {
 	getStorage,
 	ref,
 	uploadBytesResumable,
 	getDownloadURL,
 } from 'firebase/storage';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import app, {db} from '../firebase.config';
 import MotionContainer from '../components/Motion';
 import {toast} from 'react-toastify';
 import {v4 as uuid} from 'uuid';
 
-function CreateListings() {
+function EditListings() {
 	const [loading, setLoading] = useState(false);
+	const [listing, setListing] = useState<any>(null);
 	const [formData, setFormData] = useState<any>({
 		type: 'rent',
 		name: '',
@@ -49,7 +50,9 @@ function CreateListings() {
 	const auth = getAuth(app);
 	const navigate = useNavigate();
 	const isMounted = useRef(true);
+	const params = useParams();
 
+	// Set userRef to logged in user
 	useEffect(() => {
 		if (isMounted) {
 			onAuthStateChanged(auth, user => {
@@ -65,6 +68,36 @@ function CreateListings() {
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isMounted]);
+
+	// Fetch data from the listing to be updated
+	useEffect(() => {
+		setLoading(true);
+
+		const fetchListing = async () => {
+			const docRef = doc(db, 'listings', params.listingId!);
+			const docSnap = await getDoc(docRef);
+			if (docSnap.exists()) {
+				const listing = docSnap.data();
+				setListing(listing);
+				setFormData({...listing, address: listing.location});
+			} else {
+				navigate('/');
+				toast.error('Imóvel não encontrado.');
+			}
+		};
+		fetchListing();
+		setLoading(false);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	//Redirect user if he does not own the listing
+	useEffect(() => {
+		if (listing && listing.userRef !== auth.currentUser!.uid) {
+			toast.error('Acesso não permitido');
+			navigate('/');
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const onSubmit = async (e: any) => {
 		e.preventDefault();
@@ -91,7 +124,6 @@ function CreateListings() {
 			`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
 		);
 		const data = await response.json();
-		console.log(data);
 		geolocation.lat = data.results[0]?.geometry.location.lat ?? 0;
 		geolocation.lng = data.results[0]?.geometry.location.lng ?? 0;
 
@@ -162,10 +194,12 @@ function CreateListings() {
 		location && (formDataCopy.location = location);
 		!formDataCopy.offer && delete formDataCopy.discountedPrice;
 
-		const docRef = await addDoc(collection(db, 'listings'), formDataCopy);
+		// Update Listing
+		const docRef = doc(db, 'listings', params.listingId!);
+		await updateDoc(docRef, formDataCopy);
 
 		setLoading(false);
-		toast.success('Imóvel adicionado com sucesso!');
+		toast.success('Imóvel atualizado com sucesso!');
 		navigate(`/category/${formDataCopy.type}/${docRef.id}`);
 	};
 
@@ -203,7 +237,7 @@ function CreateListings() {
 		<MotionContainer>
 			<div className='profile'>
 				<header>
-					<p className='pageHeader'>Dados do imóvel</p>
+					<p className='pageHeader'>Alterar Dados do imóvel</p>
 				</header>
 				<main>
 					<form onSubmit={onSubmit} className='registerForm'>
@@ -399,4 +433,4 @@ function CreateListings() {
 	);
 }
 
-export default CreateListings;
+export default EditListings;

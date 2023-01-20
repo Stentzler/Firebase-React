@@ -2,11 +2,12 @@ import MotionContainer from '../components/Motion';
 import {useState, useEffect} from 'react';
 import {useNavigate, useParams, useSearchParams} from 'react-router-dom';
 import {doc, DocumentData, getDoc} from 'firebase/firestore';
-import app, {db} from '../firebase.config';
+import {db} from '../firebase.config';
 import {toast} from 'react-toastify';
 
 function Contact() {
 	const [landlord, setLandlord] = useState<DocumentData | null>(null);
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const params = useParams();

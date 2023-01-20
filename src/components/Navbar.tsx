@@ -28,7 +28,7 @@ function Navbar() {
 									: 'navbarListItemName'
 							}
 						>
-							Explore
+							Explorar
 						</p>
 					</li>
 
@@ -46,7 +46,7 @@ function Navbar() {
 									: 'navbarListItemName'
 							}
 						>
-							Offers
+							Ofertas
 						</p>
 					</li>
 
@@ -63,7 +63,7 @@ function Navbar() {
 									: 'navbarListItemName'
 							}
 						>
-							Profile
+							Perfil
 						</p>
 					</li>
 				</ul>

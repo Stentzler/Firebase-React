@@ -1,10 +1,9 @@
 import {collection, getDocs, limit, orderBy, query} from 'firebase/firestore';
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
-import app, {db} from '../firebase.config';
+import {db} from '../firebase.config';
 import Carousel from 'nuka-carousel/lib/carousel';
 import Spinner from '../components/Spinner';
-import MotionContainer from './Motion';
 
 function Slider() {
 	const [loading, setLoading] = useState(true);
