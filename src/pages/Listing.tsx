@@ -137,7 +137,7 @@ function Listing() {
 							to={`/contact/${listing.userRef}?listingName=${listing.name}`}
 							className='primaryButton'
 						>
-							Entrar em contato
+							Contactar
 						</Link>
 					)}
 				</div>

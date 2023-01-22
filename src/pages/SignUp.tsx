@@ -2,7 +2,7 @@ import MotionContainer from '../components/Motion';
 import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {ReactComponent as ArrowRightIcon} from '../assets/svg/keyboardArrowRightIcon.svg';
-import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import {FaEyeSlash, FaEye} from 'react-icons/fa';
 import {
 	getAuth,
 	createUserWithEmailAndPassword,
@@ -99,12 +99,19 @@ function SignUp() {
 								onChange={onChange}
 							/>
 
-							<img
-								src={visibilityIcon}
-								alt='show-password'
-								className='showPassword'
-								onClick={() => setShowPassword(prev => !prev)}
-							/>
+							{!showPassword ? (
+								<FaEye
+									size={28}
+									className='showPassword'
+									onClick={() => setShowPassword(prev => !prev)}
+								/>
+							) : (
+								<FaEyeSlash
+									size={28}
+									className='showPassword'
+									onClick={() => setShowPassword(prev => !prev)}
+								/>
+							)}
 						</div>
 
 						<Link to='/forgot-password' className='forgotPasswordLink'>
@@ -120,9 +127,11 @@ function SignUp() {
 					</form>
 
 					<OAuth />
-					<Link to='/sing-in' className='registerLink'>
-						Login
-					</Link>
+					<div className='center-tag'>
+						<Link to='/sign-in' className='registerLink'>
+							Login
+						</Link>
+					</div>
 				</main>
 			</MotionContainer>
 		</>

@@ -42,7 +42,7 @@ function ForgotPassword() {
 							value={email}
 							onChange={onChange}
 						/>
-						<Link className='forgotPasswordLink' to='/sign-in'>
+						<Link className='forgotPasswordLink back' to='/sign-in'>
 							Voltar
 						</Link>
 

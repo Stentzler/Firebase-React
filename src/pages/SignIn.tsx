@@ -3,7 +3,7 @@ import {toast} from 'react-toastify';
 import {FormEvent, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {ReactComponent as ArrowRightIcon} from '../assets/svg/keyboardArrowRightIcon.svg';
-import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import {FaEyeSlash, FaEye} from 'react-icons/fa';
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 import app from '../firebase.config';
 import OAuth from '../components/OAuth';
@@ -71,12 +71,19 @@ function SignIn() {
 								onChange={onChange}
 							/>
 
-							<img
-								src={visibilityIcon}
-								alt='show-password'
-								className='showPassword'
-								onClick={() => setShowPassword(prev => !prev)}
-							/>
+							{!showPassword ? (
+								<FaEye
+									size={28}
+									className='showPassword'
+									onClick={() => setShowPassword(prev => !prev)}
+								/>
+							) : (
+								<FaEyeSlash
+									size={28}
+									className='showPassword'
+									onClick={() => setShowPassword(prev => !prev)}
+								/>
+							)}
 						</div>
 
 						<Link to='/forgot-password' className='forgotPasswordLink'>
@@ -92,9 +99,11 @@ function SignIn() {
 					</form>
 
 					<OAuth />
-					<Link to='/sign-up' className='registerLink'>
-						Registrar-me
-					</Link>
+					<div className='center-tag'>
+						<Link to='/sign-up' className='registerLink'>
+							Registrar-me
+						</Link>
+					</div>
 				</main>
 			</div>
 		</MotionContainer>
