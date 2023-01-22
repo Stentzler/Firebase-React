@@ -10,6 +10,7 @@ import EditListing from './pages/EditListing';
 import Explore from './pages/Explore';
 import ForgotPassword from './pages/ForgotPassword';
 import Listing from './pages/Listing';
+import NotFound from './pages/NotFound';
 import Offers from './pages/Offers';
 import Profile from './pages/Profile';
 import SignIn from './pages/SignIn';
@@ -36,6 +37,7 @@ function App() {
 						element={<Listing />}
 					/>
 					<Route path='/contact/:landlordId' element={<Contact />} />
+					<Route path='/*' element={<NotFound />} />
 				</Routes>
 
 				<Navbar />

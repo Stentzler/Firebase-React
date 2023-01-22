@@ -71,102 +71,103 @@ function CreateListings() {
 
 		setLoading(true);
 
-		if (discountedPrice >= regularPrice) {
-			setLoading(false);
-			toast.error('Valor com desconto deve ser menor do que valor normal');
-			return;
-		}
+		// if (discountedPrice >= regularPrice) {
+		// 	setLoading(false);
+		// 	toast.error('Valor com desconto deve ser menor do que valor normal');
+		// 	return;
+		// }
 
-		if (images.length > 6) {
-			setLoading(false);
-			toast.error('Máximo de 6 imagens');
-			return;
-		}
+		// if (images.length > 6) {
+		// 	setLoading(false);
+		// 	toast.error('Máximo de 6 imagens');
+		// 	return;
+		// }
 
-		// Adding geoloaction
-		let geolocation: any = {};
-		let location = undefined;
+		// // Adding geoloaction
+		// let geolocation: any = {};
+		// let location = undefined;
 
-		const response = await fetch(
-			`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
-		);
-		const data = await response.json();
-		console.log(data);
-		geolocation.lat = data.results[0]?.geometry.location.lat ?? 0;
-		geolocation.lng = data.results[0]?.geometry.location.lng ?? 0;
+		// const response = await fetch(
+		// 	`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
+		// );
+		// const data = await response.json();
+		// console.log(data);
+		// geolocation.lat = data.results[0]?.geometry.location.lat ?? 0;
+		// geolocation.lng = data.results[0]?.geometry.location.lng ?? 0;
 
-		location =
-			data.status === 'OK' ? data.results[0]?.formatted_address : undefined;
+		// location =
+		// 	data.status === 'OK' ? data.results[0]?.formatted_address : undefined;
 
-		if (location === undefined) {
-			setLoading(false);
-			toast.error('O endereço enviado não foi encontrado');
-			return;
-		}
+		// if (location === undefined) {
+		// 	setLoading(false);
+		// 	toast.error('O endereço enviado não foi encontrado');
+		// 	return;
+		// }
 
 		// Store Images in firebase
-		const storeImage = async (image: any) => {
-			return new Promise((resolve, reject) => {
-				const storage = getStorage();
-				const fileName = `${auth.currentUser!.uid}-${image.name}-${uuid()}`;
-				const storageRef = ref(storage, 'images/' + fileName);
-				const uploadTask = uploadBytesResumable(storageRef, image);
+		// const storeImage = async (image: any) => {
+		// 	return new Promise((resolve, reject) => {
+		// 		const storage = getStorage();
+		// 		const fileName = `${auth.currentUser!.uid}-${image.name}-${uuid()}`;
+		// 		const storageRef = ref(storage, 'images/' + fileName);
+		// 		const uploadTask = uploadBytesResumable(storageRef, image);
 
-				uploadTask.on(
-					'state_changed',
-					snapshot => {
-						const progress =
-							(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-						console.log('upload' + progress + '% done');
-						switch (snapshot.state) {
-							case 'paused':
-								console.log('Upload paused');
-								break;
-							case 'running':
-								console.log('Upload running');
-								break;
-						}
-					},
-					error => {
-						reject(error);
-					},
-					() => {
-						getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
-							resolve(downloadURL);
-						});
-					}
-				);
-			});
-		};
+		// 		uploadTask.on(
+		// 			'state_changed',
+		// 			snapshot => {
+		// 				const progress =
+		// 					(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+		// 				console.log('upload' + progress + '% done');
+		// 				switch (snapshot.state) {
+		// 					case 'paused':
+		// 						console.log('Upload paused');
+		// 						break;
+		// 					case 'running':
+		// 						console.log('Upload running');
+		// 						break;
+		// 				}
+		// 			},
+		// 			error => {
+		// 				reject(error);
+		// 			},
+		// 			() => {
+		// 				getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+		// 					resolve(downloadURL);
+		// 				});
+		// 			}
+		// 		);
+		// 	});
+		// };
 
-		const imgUrls = await Promise.all(
-			[...images].map(image => storeImage(image))
-		).catch(() => {
-			setLoading(false);
-			toast.error('Não foi possível enviar as imagens');
-			return;
-		});
+		// const imgUrls = await Promise.all(
+		// 	[...images].map(image => storeImage(image))
+		// ).catch(() => {
+		// 	setLoading(false);
+		// 	toast.error('Não foi possível enviar as imagens');
+		// 	return;
+		// });
 
-		const formDataCopy = {
-			...formData,
-			imgUrls,
-			geolocation,
-			timestamp: serverTimestamp(),
-		};
+		// const formDataCopy = {
+		// 	...formData,
+		// 	imgUrls,
+		// 	geolocation,
+		// 	timestamp: serverTimestamp(),
+		// };
 
-		// Cleaning data for storage
-		delete formDataCopy.images;
-		delete formDataCopy.latitude;
-		delete formDataCopy.longitude;
-		delete formDataCopy.address;
-		location && (formDataCopy.location = location);
-		!formDataCopy.offer && delete formDataCopy.discountedPrice;
+		// // Cleaning data for storage
+		// delete formDataCopy.images;
+		// delete formDataCopy.latitude;
+		// delete formDataCopy.longitude;
+		// delete formDataCopy.address;
+		// location && (formDataCopy.location = location);
+		// !formDataCopy.offer && delete formDataCopy.discountedPrice;
 
-		const docRef = await addDoc(collection(db, 'listings'), formDataCopy);
+		// const docRef = await addDoc(collection(db, 'listings'), formDataCopy);
 
 		setLoading(false);
-		toast.success('Imóvel adicionado com sucesso!');
-		navigate(`/category/${formDataCopy.type}/${docRef.id}`);
+		toast.error('Opção de crição de anúncios desativada');
+		// toast.success('Imóvel adicionado com sucesso!');
+		// navigate(`/category/${formDataCopy.type}/${docRef.id}`);
 	};
 
 	const onMutate = (e: any) => {

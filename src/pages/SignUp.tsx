@@ -3,13 +3,13 @@ import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {ReactComponent as ArrowRightIcon} from '../assets/svg/keyboardArrowRightIcon.svg';
 import {FaEyeSlash, FaEye} from 'react-icons/fa';
-import {
-	getAuth,
-	createUserWithEmailAndPassword,
-	updateProfile,
-} from 'firebase/auth';
-import {setDoc, doc, serverTimestamp} from 'firebase/firestore';
-import app, {db} from '../firebase.config';
+// import {
+// 	getAuth,
+// 	createUserWithEmailAndPassword,
+// 	updateProfile,
+// } from 'firebase/auth';
+// import {setDoc, doc, serverTimestamp} from 'firebase/firestore';
+// import app, {db} from '../firebase.config';
 import {toast} from 'react-toastify';
 import OAuth from '../components/OAuth';
 
@@ -34,27 +34,27 @@ function SignUp() {
 		e.preventDefault();
 
 		try {
-			const auth = getAuth(app);
+			// const auth = getAuth(app);
 
-			const userCredential = await createUserWithEmailAndPassword(
-				auth,
-				email,
-				password
-			);
+			// const userCredential = await createUserWithEmailAndPassword(
+			// 	auth,
+			// 	email,
+			// 	password
+			// );
 
-			const user = userCredential.user;
+			// const user = userCredential.user;
 
-			await updateProfile(auth.currentUser!, {
-				displayName: name,
-			});
+			// await updateProfile(auth.currentUser!, {
+			// 	displayName: name,
+			// });
 
-			const formDataCopy: any = {...formData};
-			delete formDataCopy.password;
-			formDataCopy.timestamp = serverTimestamp();
+			// const formDataCopy: any = {...formData};
+			// delete formDataCopy.password;
+			// formDataCopy.timestamp = serverTimestamp();
 
-			await setDoc(doc(db, 'users', user.uid), formDataCopy);
+			// await setDoc(doc(db, 'users', user.uid), formDataCopy);
 
-			toast.success('Registrado com sucesso');
+			toast.error('Não podemos registrá-lo devido ao storage da Database!');
 
 			navigate('/');
 		} catch (error: any) {
